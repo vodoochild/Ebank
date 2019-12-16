@@ -1,0 +1,5 @@
+package com.example.demo.dao;
+package com.example.demo.entity.Client;
+public interface ClientRepository extends JpaRepository<Client,Long>{
+
+}
