@@ -14,8 +14,28 @@ public class Client implements Serializable {
 	    private  String dateNaissance ;
 	    @OneToMany(mappedBy = "client",fetch = FetchType.LAZY)
 	    private Collection<Compte> comptes;
+	    @ManyToOne
+	    @JoinColumn(name="ID_AGENT")
+	    private Agent agent;
 
-	    public Client() {
+	    public Client(String nom, String prenom, String dateNaissance) {
+			super();
+			this.nom = nom;
+			this.prenom = prenom;
+			this.dateNaissance = dateNaissance;
+		}
+
+
+		public Client(String nom, String prenom, String dateNaissance, Agent agent) {
+			super();
+			this.nom = nom;
+			this.prenom = prenom;
+			this.dateNaissance = dateNaissance;
+			this.agent = agent;
+		}
+
+
+		public Client() {
 	        super();
 	    }
 

@@ -12,7 +12,7 @@ public class Compte  implements Serializable {
 	    private Date dateCreation;
 	    private double solde;
 	    @ManyToOne
-	    //@JoinColumn(name="CODE_CLI")
+	    @JoinColumn(name="CODE_CLI")
 	    private Client client;
 	    @OneToMany(mappedBy = "compte")
 	    private Collection<Operation> operations;

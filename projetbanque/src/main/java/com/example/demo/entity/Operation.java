@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name ="TYPE_OP",discriminatorType = DiscriminatorType.STRING, length = 1)
+@DiscriminatorColumn(name ="TYPE_OP",discriminatorType = DiscriminatorType.STRING, columnDefinition="VARCHAR(2)" ,length = 10)
 public class Operation  implements Serializable {
-	 @Id
+	   @Id
 	    @GeneratedValue
 	    private long numero;
 	    private Date dateOperation;
 	    private double montant;
 	    @ManyToOne
-//	    @JoinColumn(name="CODE_CPTE")
+	    @JoinColumn(name="CODE_CPTE")
 	    private Compte compte;
 	    public Operation(){
 	        super();

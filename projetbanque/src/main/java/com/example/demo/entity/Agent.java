@@ -11,7 +11,7 @@ public class Agent implements Serializable {
 	    private Integer Id;
 	    private String nom;
 	    private String prenom;
-	    @OneToMany(mappedBy = "compte")
+	    @OneToMany(mappedBy = "agent")
 	    private Collection<Client>clients;
 	    
 		public Agent(Integer id, String nom, String prenom, Collection<Client> clients) {
