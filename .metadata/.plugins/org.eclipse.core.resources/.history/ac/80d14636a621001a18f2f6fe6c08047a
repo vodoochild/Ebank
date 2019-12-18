@@ -6,7 +6,6 @@ import java.lang.RuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.dao.*;
@@ -57,10 +56,9 @@ private IbankService bankService;
 	}
 
 	@Override
-	public ResponseEntity <?>  virement(String codeCompte1, String codeCompte2, double montant) {
+	public void virement(String codeCompte1, String codeCompte2, double montant) {
 		retirer(codeCompte1,montant);
 		verser(codeCompte2,montant);
-		return ResponseEntity.ok(null);
 		
 	}
 
@@ -69,18 +67,6 @@ private IbankService bankService;
 		//return null;
 	return operationRepositry.listeOperation
 			(codeCompte,  PageRequest.of(page, size));
-	}
-
-	@Override
-	public ResponseEntity<?> ajouterClient(Client cl) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<?> ajouterComptebank(Client cl) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 
