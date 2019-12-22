@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Client implements Serializable {
 	 @Id
 	    @GeneratedValue
-	    private Integer Id;
+	    private Integer id;
 	    private String nom;
 	    private String prenom;
 	    private  String dateNaissance ;
@@ -17,8 +17,29 @@ public class Client implements Serializable {
 	    @ManyToOne
 	    @JoinColumn(name="ID_AGENT")
 	    private Agent agent;
+	    @OneToOne
+	    private Login login;
+	    public Agent getAgent() {
+			return agent;
+		}
 
-	    public Client(String nom, String prenom, String dateNaissance) {
+
+		public void setAgent(Agent agent) {
+			this.agent = agent;
+		}
+
+
+		public Login getLogin() {
+			return login;
+		}
+
+
+		public void setLogin(Login login) {
+			this.login = login;
+		}
+
+
+		public Client(String nom, String prenom, String dateNaissance) {
 			super();
 			this.nom = nom;
 			this.prenom = prenom;
@@ -41,7 +62,7 @@ public class Client implements Serializable {
 
 
 	    public Integer getId() {
-	        return Id;
+	        return id;
 	    }
 
 	    public String getDateNaissance() {
@@ -61,7 +82,7 @@ public class Client implements Serializable {
 	    }
 
 	    public void setId(Integer id) {
-	        Id = id;
+	        id = id;
 	    }
 
 	    public void setNom(String nom) {

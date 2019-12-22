@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import com.example.demo.dao.ClientRepository;
 import com.example.demo.dao.CompteRepository;
 import com.example.demo.entity.*;
+import com.example.demo.service.ClientService;
 import com.example.demo.service.IbankService;
 
 @SpringBootApplication
@@ -23,6 +24,8 @@ private ClientRepository clientRepository;
 private CompteRepository compeRepository;
 @Autowired
 private IbankService bankservice;
+@Autowired
+private ClientService clientservice;
 	public static void main(String[] args) {
 		System.setProperty("server.port","8083");
 	 SpringApplication.run(ProjetbanqueApplication.class, args);
@@ -36,6 +39,8 @@ private IbankService bankservice;
 	Compte cp1=compeRepository.save(new Compte("c2",new Date(),9000,c2));
 	//bankservice.verser("c1", 9000);
 	bankservice.verser("c2", 50000);
+	
+	//clientservice.deleteClient(5);
 	}
 
 }

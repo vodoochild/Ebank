@@ -29,7 +29,7 @@ private IbankService bankService;
 			if(cp.isPresent()) {
 			cp2=cp.get();
 			}
-			else if(cp.isEmpty())throw new RuntimeException("Compte introuvable !");
+			else if(!cp.isPresent())throw new RuntimeException("Compte introuvable !");
 		return cp2;
 	}
 
