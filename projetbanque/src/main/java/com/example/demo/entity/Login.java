@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 
 
@@ -35,11 +37,12 @@ public class Login implements Serializable {
 
 	private String email;
     public String getPassword() {
-		/*
-		 * String pass = null; BCryptPasswordEncoder bcr = new BCryptPasswordEncoder();
-		 * pass =(bcr.encode((CharSequence)pass)); return this.password=pass;
-		 */
-		return password;
+	
+		 String pass = null; BCryptPasswordEncoder bcr = new BCryptPasswordEncoder();
+		 pass =(bcr.encode((CharSequence)pass)); 
+		 return this.password=pass;
+		 
+		
 	}
 
 	public void setPassword(String password) {
@@ -51,8 +54,8 @@ public class Login implements Serializable {
     public Login(Long id,String email,String pass){
         this.id = id ;
         this.email=email;
-      /* BCryptPasswordEncoder bcr = new BCryptPasswordEncoder();
-       pass =(bcr.encode((CharSequence)pass));*/
+      BCryptPasswordEncoder bcr = new BCryptPasswordEncoder();
+       pass =(bcr.encode((CharSequence)pass));
         this.password=pass;
     }
 

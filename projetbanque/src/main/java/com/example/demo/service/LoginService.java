@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.LoginRepository;
@@ -14,23 +15,22 @@ public class LoginService {
     LoginRepository loginRepository;
 
     @Autowired
-   // BCryptPasswordEncoder bCryptPasswordEncoder;
-	/*
-	 * public Login findbyemail(String email) { return
-	 * loginRepository.getByEmail(email); }
-	 */
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	 public Login findbyemail(String email) { return
+	 loginRepository.getByEmail(email); }
+	 
 
     public List<Login> findAll(){
         return loginRepository.findAll();
     }
-    
-  /*  public boolean passCheck(String email,String password) {
+  public boolean passCheck(String email,String password) {
 
         Login l = loginRepository.getByEmail(email);
         String pass = l.getPassword();
         return bCryptPasswordEncoder.matches(password, pass);
 
-    }*/
+    }
     public Login findbyEmail(String email){
         return loginRepository.getByEmail(email);
     }
