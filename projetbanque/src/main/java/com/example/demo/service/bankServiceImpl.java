@@ -71,17 +71,6 @@ private IbankService bankService;
 			(codeCompte,  PageRequest.of(page, size));
 	}
 
-	@Override
-	public ResponseEntity<?> ajouterClient(Client cl) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<?> ajouterComptebank(Client cl) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 
 }
