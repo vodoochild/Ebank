@@ -46,9 +46,11 @@ public void wireTransfer (@RequestParam("codecompte")String ccompte1,@RequestPar
 	
 	
 }
+@RequestMapping("/Retirer")
 
-
-
+public void retrieve(@RequestParam("codecompte")String code,@RequestParam("montant")double montant ) {
+	ibankservice.retirer(code, montant);
+}
 
 
 
