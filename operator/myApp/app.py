@@ -29,6 +29,13 @@ def pay_my_bill(bill_id, transaction_id):
     return pay_bill(bill_id, transaction_id)
 
 
+@app.route('/test/<text>')
+def test(text):
+    from .models.store import test
+    return test(text)
+
+
+
 if __name__ == "__main__":
 
     app.run()

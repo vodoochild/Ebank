@@ -29,15 +29,15 @@ def get_my_bills(number):
 def bills_toJson(number):
     client, my_bills = get_my_bills(number)
     if client is None:
-        out_json = {"Number of bills": 0, "Client": "Number is not correct", "Bills": []}
+        out_json = {"message": "Number is not correct"}
         return json.dumps(out_json)
-    out_json = {"Number of bills": len(my_bills), "Client":{"Name": client.firstName+" "+client.lastName,
-                                                            "Number": client.number}, "Bills": []}
+    out_json = {"numberofbills": len(my_bills), "client":{"name": client.firstName+" "+client.lastName,
+                                                            "number": client.number}, "bills": []}
     if len(my_bills) == 0:
         pass
     else:
         for bill in my_bills:
-            out_json["Bills"].append({"Bill Id": bill.id, "Date": bill.date,"Bill Value": bill.value})
+            out_json["bills"].append({"bill_Id": bill.id, "date": bill.date,"bill_Value": bill.value})
 
     return json.dumps(out_json)
 
@@ -46,7 +46,7 @@ def pay_bill(bill_id, transaction_id):
     # appel au web service de la banque pour demander est ce que vraiment la transaction a réalisé
     test = transaction_id # on va appeler le web service du banque
     if not transaction_id:
-        out_json = {"Message": "On a pas recu le paiement"}
+        out_json = {"message": "On a pas recu le paiement"}
         return json.dumps(out_json)
 
     Session = sessionmaker(bind=engine)
@@ -56,37 +56,43 @@ def pay_bill(bill_id, transaction_id):
     if bill is None:
         print("Bill don't exist")
         session.close()
-        out_json = {"Message": "il n'y a aucune facture avec cette id"}
+        out_json = {"message": "il n'y a aucune facture avec cette id"}
         return json.dumps(out_json)
     else:
         if bill.paid ==True :
             print("Bill already paid")
             session.close()
-            out_json = {"Message": "Facture déja payée"}
+            out_json = {"message": "Facture déja payée"}
             return json.dumps(out_json)
         bill.paid = True
         session.commit()
         print("Bill paid")
         session.close()
-        out_json = {"Message": "Facture payée"}
+        out_json = {"message": "Facture payée"}
         return json.dumps(out_json)
 
 
 def all_bills_toJson(number):
     client = get_client(number)
     if client is None:
-        out_json = {"Number of bills": 0, "Client": "Number is not correct", "Bills": []}
+        out_json = {"message": "Number is not correct"}
         return json.dumps(out_json)
     bills = get_all_bills()
     my_bills = []
     for bill in bills:
         if bill.client.id == client.id:
             my_bills.append(bill)
-    out_json = {"Number of bills": len(my_bills), "Client": {"Name": client.firstName + " " + client.lastName,
-                                                             "Number": client.number}, "Bills": []}
+    out_json = {"numberofbills": len(my_bills), "client": {"name": client.firstName + " " + client.lastName,
+                                                             "number": client.number}, "bills": []}
     if len(my_bills) == 0:
         pass
     else:
         for bill in my_bills:
-            out_json["Bills"].append({"Bill Id": bill.id, "Date": bill.date, "Bill Value": bill.value, "paid": bill.paid})
+            out_json["bills"].append({"bill_Id": bill.id, "date": bill.date, "bill_Value": bill.value, "paid": bill.paid})
+    return json.dumps(out_json)
+
+
+
+def test(text):
+    out_json = {"NumberOfBills": 0, "Client": "Ayoub el Ouarak"}
     return json.dumps(out_json)
