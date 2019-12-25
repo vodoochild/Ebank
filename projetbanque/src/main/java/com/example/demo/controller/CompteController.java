@@ -13,10 +13,12 @@ import com.example.demo.service.CompteService;
 public class CompteController {
 	@Autowired 
 	private CompteService compteservice;
+	
 	 @GetMapping(value ="getAllAccounts")
 	 
 	public List<Compte> getAllUserAccounts(@RequestParam("id")Integer id){
 		 return compteservice.getAllClientAcounts(id);
 	 }
+	 
 
 }

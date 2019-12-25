@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.lang.RuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +35,18 @@ private IbankService bankService;
 	}
 
 	@Override
-	public void verser(String codeCompte, double montant) {
+	public ResponseEntity <?> verser(String codeCompte, double montant) {
 		Compte cp = ConsulterCompte(codeCompte);
 		Versement versement = new Versement(new Date(), montant, cp);
 		operationRepositry.save(versement);
 		cp.setSolde(cp.getSolde()+montant);
 		compteRepository.save(cp);
+		return ResponseEntity.ok(null);
 		
 	}
 
 	@Override
-	public void retirer(String codeCompte, double montant) {
+	public ResponseEntity <?> retirer(String codeCompte, double montant) {
 		Compte cp = ConsulterCompte(codeCompte);
 		if(cp.getSolde()<montant) {
 			throw new RuntimeException("solde insuffisant!");
@@ -53,6 +55,7 @@ private IbankService bankService;
 		operationRepositry.save(r);
 		cp.setSolde(cp.getSolde()-montant);
 		compteRepository.save(cp);
+		return ResponseEntity.ok(null);
 		
 	}
 
@@ -64,11 +67,11 @@ private IbankService bankService;
 		
 	}
 
+	
 	@Override
-	public Page<Operation> listeOperation(String codeCompte, int page, int size) {
-		//return null;
-	return operationRepositry.listeOperation
-			(codeCompte,  PageRequest.of(page, size));
+	public List<Operation> listeOperation(String codeCompte) {
+		
+		return operationRepositry.listeOperation(codeCompte);
 	}
 
 	

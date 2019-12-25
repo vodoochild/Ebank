@@ -1,15 +1,22 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Compte;
+import com.example.demo.entity.Operation;
 import com.example.demo.service.IbankService;
 
-@Controller
+
+@CrossOrigin("*")
+@RestController
 public class BankController {
 	//controller needs the services (couche metier)
 	@Autowired
@@ -21,16 +28,9 @@ public class BankController {
 		return "comptes";
 	}
 @RequestMapping("/consulterCompte")
-public String consulter(Model model ,String codeCompte) {
-	
-	try {
-		Compte cp= ibankservice.ConsulterCompte(codeCompte);
-		model.addAttribute("compte", cp);
-	} catch(Exception e) {
-		model.addAttribute("exception",e);
-	}
-	
-	return "comptes";
+public Compte consulter(String codeCompte) {
+	Compte cp= ibankservice.ConsulterCompte(codeCompte);		
+	return cp;
 }
 
 @RequestMapping("/Versement")
@@ -52,7 +52,11 @@ public void retrieve(@RequestParam("codecompte")String code,@RequestParam("monta
 	ibankservice.retirer(code, montant);
 }
 
+@RequestMapping("/AccountTransactions")
+public List<Operation> getAllAccountTransactions(@RequestParam("codecompte")String ccompte){
+    return ibankservice.listeOperation(ccompte);
 
+}
 
 
 

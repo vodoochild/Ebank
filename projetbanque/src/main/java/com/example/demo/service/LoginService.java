@@ -38,4 +38,8 @@ public class LoginService {
     public void saveLogin(Login login){
         loginRepository.save(login);
     }
+    public void deleteLoginById(Long id){
+        loginRepository.deleteById(id);
+    }
+
 }
